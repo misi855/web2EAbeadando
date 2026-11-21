@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\HajoController;
 use App\Http\Controllers\KapcsolatController;
+use App\Http\Controllers\AdminHajoController;
 
 Route::view('/', 'fooldal')->name('home');
 
@@ -24,9 +25,17 @@ Route::get('/uzenetek', [KapcsolatController::class, 'index'])
     ->name('uzenetek');
 
 
-Route::get('/admin', function () {
-    return 'Admin felület – sikeres belépés.';
-})->middleware(['auth', EnsureUserIsAdmin::class])->name('admin');
+Route::middleware(['auth', EnsureUserIsAdmin::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [AdminHajoController::class, 'index'])
+            ->name('hajok.index');
+
+        Route::resource('hajok', AdminHajoController::class)
+            ->parameters(['hajok' => 'hajo'])
+            ->except(['index', 'show']);
+    });
 
 Route::get('/adatbazis', [HajoController::class, 'index'])
     ->name('adatbazis');
@@ -34,7 +43,7 @@ Route::get('/adatbazis', [HajoController::class, 'index'])
 Route::get('/diagram', [HajoController::class, 'diagram'])
     ->name('diagram');
 
-    
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 

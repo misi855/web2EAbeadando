@@ -5,8 +5,8 @@
 @section('content')
     <h1>Üzenetek</h1>
 
-    <div style="overflow-x: auto">
-        <table>
+    <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
                     <th scope="col">Küldés ideje</th>

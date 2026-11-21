@@ -14,7 +14,7 @@
 
         <p>
             <label for="nev">Név</label><br>
-            <input id="nev" name="nev" value="{{ old('nev') }}" required maxlength="100">
+            <input class="form-control" id="nev" name="nev" value="{{ old('nev') }}" required maxlength="100">
             @error('nev')
                 <br><span>{{ $message }}</span>
             @enderror
@@ -22,7 +22,7 @@
 
         <p>
             <label for="email">E-mail-cím</label><br>
-            <input id="email" name="email" type="email"
+            <input class="form-control" id="email" name="email" type="email"
                    value="{{ old('email') }}" required maxlength="255">
             @error('email')
                 <br><span>{{ $message }}</span>
@@ -31,13 +31,13 @@
 
         <p>
             <label for="uzenet">Üzenet</label><br>
-            <textarea id="uzenet" name="uzenet" rows="6"
+            <textarea class="form-control" id="uzenet" name="uzenet" rows="6"
                       required maxlength="3000">{{ old('uzenet') }}</textarea>
             @error('uzenet')
                 <br><span>{{ $message }}</span>
             @enderror
         </p>
 
-        <button type="submit">Üzenet küldése</button>
+        <button class="btn btn-primary" type="submit">Üzenet küldése</button>
     </form>
 @endsection
